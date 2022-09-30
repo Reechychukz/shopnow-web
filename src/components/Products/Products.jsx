@@ -4,8 +4,8 @@ import { Grid } from '@material-ui/core';
 import Product from './Product/Product';
 
 const products = [
-    { id: 1, name: 'Shoes', description: 'Running shoes.', price: '$5', image: 'https://www-konga-com-res.cloudinary.com/w_auto,f_auto,fl_lossy,dpr_auto,q_auto/media/catalog/product/A/Q/2685_1610988379.jpg' },
-    { id: 2, name: 'Macbook', description: 'Apple Macbook.', price: '$10', image: 'https://media.stockinthechannel.com/pic/095rTteIuUaY-7A0iE2zIA.c-r.jpg' }
+    { id: 1, name: 'Shoes', description: 'Running shoes.', price: '$5', image: 'https://e7.pngegg.com/pngimages/88/948/png-clipart-shoe-shoes-brown-leather-thumbnail.png' },
+    { id: 2, name: 'Macbook', description: 'Apple Macbook.', price: '$10', image: 'https://images.unsplash.com/photo-1569770218135-bea267ed7e84?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80' }
 ]
 const Products = () => {
     return (
