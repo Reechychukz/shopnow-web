@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { commerce } from './lib/commerce';
 import { Navbar, Products, Cart } from './components';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App = () => {
     const [products, setProducts] = useState([]);
@@ -17,7 +18,27 @@ const App = () => {
     }
 
     const handleAddToCart = async (productId, quantity) => {
-        setCart(await commerce.cart.add(productId, quantity));
+        const { cart } = await commerce.cart.add(productId, quantity);
+
+        setCart(cart);
+    }
+
+    const handleUpdateCartQty = async (productId, quantity) => {
+        const { cart } = await commerce.cart.update(productId, { quantity });
+
+        setCart(cart);
+    }
+
+    const handleRemoveFromCart = async (productId) => {
+        const { cart } = await commerce.cart.remove(productId);
+
+        setCart(cart);
+    }
+
+    const handleEmptyCart = async () => {
+        const { cart } = await commerce.cart.empty();
+
+        setCart(cart);
     }
 
     useEffect(() => {
@@ -25,14 +46,29 @@ const App = () => {
         fetchCart();
     }, []);
 
-    //console.log(cart.line_items);
 
     return (
-        <div>
-            <Navbar totalItems={cart.total_items} />
-            {/* <Products products={products} onAddToCart={handleAddToCart} /> */}
-            <Cart cart={cart} />
-        </div>
+        <Router>
+            <div>
+                <Navbar totalItems={cart.total_items} />
+                <Routes>
+                    <Route exact path='/' element={
+                        <Products
+                            products={products}
+                            onAddToCart={handleAddToCart}
+                        />
+                    } />
+                    <Route path='/cart' element={
+                        <Cart
+                            cart={cart}
+                            handleUpdateCartQty={handleUpdateCartQty}
+                            handleRemoveFromCart={handleRemoveFromCart}
+                            handleEmptyCart={handleEmptyCart}
+                        />
+                    } />
+                </Routes>
+            </div>
+        </Router>
     )
 }
 
